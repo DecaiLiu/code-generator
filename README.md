@@ -6,7 +6,7 @@ mybatis-mysql 代码自动生成工具，支持自定义注释
 <br/>
 <br/>如果使用的mysql8以下的版本，需要自行下载并配置驱动包的路径
 <br/>
-<br/>注意：
+<br/><b>注意：</b>
 <br/>如果重复执行StartUp的main方法需要先删除xxxMapper.xml文件，因为这个文件不会被覆盖，而是append。
 <br/>
 <br/>待实现功能：
