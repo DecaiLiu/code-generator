@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <properties resource="generator.properties"/>
+    <classPathEntry location="${jdbc.driverLocation}"/>
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- 生成序列号版本号 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--<plugin type="org.mybatis.generator.plugins.BaseImportPlugin"/>-->
+        <!--<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />-->
+
+        <!-- 生成 toString 方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 自定义注释 -->
+        <commentGenerator type="com.mybatis.generator.MysqlCommentGenerator">
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <property name="author" value="decai.liu"/>
+            <property name="dateFormat" value="yyyy/MM/dd"/>
+
+            <!-- 跳过注释 -->
+            <!--<property name="suppressAllComments" value="true"/>-->
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}"
+                        password="${jdbc.password}">
+            <!-- 设置 useInformationSchema 属性为 true -->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="${entityPath}" targetProject="${basePath}">
+            <property name="constructorBased" value="false"/>
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${mapperPath}" targetProject="${basePath}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="${daoPath}" targetProject="${basePath}" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+            <property name="exampleMethodVisibility" value="default"/>
+            <property name="methodNameCalculator" value="default"/>
+            <!--<property name="rootInterface" value=""/>-->
+            <property name="useLegacyBuilder" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 配置需要生成代码的数据库&表结构信息，如果多张表生成代码赋值多次填写即可 -->
+        <table schema="push"
+               tableName="${tableName}"
+               domainObjectName="${domainObjectName}"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="true"
+               enableInsert="true"
+               enableDeleteByPrimaryKey="true"
+        />
+    </context>
+</generatorConfiguration>
